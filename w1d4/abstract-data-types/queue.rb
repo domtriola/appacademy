@@ -12,7 +12,7 @@ class Queue
   end
 
   def show
-    p @queue
+    @queue.dup
   end
 end
 
@@ -21,9 +21,9 @@ if __FILE__ == $PROGRAM_NAME
   queue.enqueue(1)
   queue.enqueue(2)
   queue.enqueue(3)
-  queue.show # => [1, 2, 3]
+  p queue.show # => [1, 2, 3]
   p queue.dequeue # => 1
   p queue.dequeue # => 2
   p queue.dequeue # => 3
-  queue.show # => []
+  p queue.show # => []
 end

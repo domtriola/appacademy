@@ -23,7 +23,7 @@ class Map
   end
 
   def show
-    p @map
+    @map.dup
   end
 end
 
@@ -32,10 +32,10 @@ if __FILE__ == $PROGRAM_NAME
   map.assign(:a, 1)
   map.assign(:b, 2)
   map.assign(:c, 3)
-  map.show # => [[:a, 1], [:b, 2], [:c, 3]]
+  p map.show # => [[:a, 1], [:b, 2], [:c, 3]]
   p map.lookup(:b) # => 2
   map.remove(:b)
-  map.show # => [[:a, 1], [:c, 3]]
+  p map.show # => [[:a, 1], [:c, 3]]
   map.assign(:a, 4)
-  map.show # => [[:a, 4], [:c, 3]]
+  p map.show # => [[:a, 4], [:c, 3]]
 end

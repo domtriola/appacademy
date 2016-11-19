@@ -12,7 +12,7 @@ class Stack
   end
 
   def show
-    p @stack
+    @stack.dup
   end
 end
 
@@ -21,9 +21,9 @@ if __FILE__ == $PROGRAM_NAME
   stack.add(1)
   stack.add(2)
   stack.add(3)
-  stack.show # => [1, 2, 3]
+  p stack.show # => [1, 2, 3]
   p stack.remove # => 3
   p stack.remove # => 2
   p stack.remove # => 1
-  stack.show # => []
+  p stack.show # => []
 end
