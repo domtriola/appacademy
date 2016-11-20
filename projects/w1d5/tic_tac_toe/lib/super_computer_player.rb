@@ -7,26 +7,10 @@ class SuperComputerPlayer < ComputerPlayer
     winning = all_children.find { |child| child.winning_node?(mark) }
     return winning.prev_move_pos if winning
 
-    opp_mark = mark == :x ? :o : :x
+    to_block = all_children.find { |child| !child.losing_node?(mark) }
+    return to_block.prev_move_pos if to_block
 
-    to_block = all_children.find? { |child| child.winning_node?(opp_mark) }
-    to_block
-
-    # to_block = []
-    # all_children.each do |child|
-    #   to_block = child.children.select do |opp_child|
-    #     opp_child.winning_node?(opp_mark)
-    #   end
-    # end
-    #
-    # all_children.delete_if do |child|
-    #   to_block.include?(child)
-    # end
-    #
-    # all_children.sample.prev_move_pos
-
-    # not_losing = root.children.find { |child| !child.losing_node?(mark) }
-    # not_losing.prev_move_pos
+    raise "I'm not supposed to lose..."
   end
 end
 
