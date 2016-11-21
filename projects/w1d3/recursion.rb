@@ -115,7 +115,19 @@ end
 
 
 def bsearch(array, target)
+  return nil if array.length == 1 && array.first != target
+  return 0 if array.length == 1
 
+  guess = array.length / 2
+  left = array.take(guess)
+  right = array.drop(guess)
+
+  if target < array[guess]
+    bsearch(left, target)
+  else
+    right_search = bsearch(right, target)
+    right_search.nil? ? nil : guess + right_search
+  end
 end
 
 # p bsearch([1, 2, 3], 1) # => 0
@@ -128,16 +140,78 @@ end
 
 
 def merge(arr1, arr2)
+  merged = []
+
+  until arr1.empty? || arr2.empty?
+    if arr1.first < arr2.first
+      merged << arr1.shift
+    else
+      merged << arr2.shift
+    end
+  end
+
+  merged + arr1 + arr2
 end
 
 def merge_sort(array)
+  return array if array.length <= 1
+
+  left = array.take(array.length / 2)
+  right = array.drop(array.length / 2)
+
+  merge(merge_sort(left), merge_sort(right))
 end
+
+# p merge_sort([8,4,5,2,1,7,6,3]) # => [1, 2, 3, 4, 5, 6, 7, 8]
+
 
 def subsets(array)
+  return [[]] if array.empty?
+
+  dupped = array.dup
+  last = dupped.pop
+  sets = subsets(dupped)
+
+  subsets(dupped).each do |set|
+    sets << (set << last)
+  end
+
+  sets
 end
+
+# p subsets([1, 2, 3]) # => [[], [1], [2], [1, 2], [3],
+#                            [1, 3], [2, 3], [1, 2, 3]]
+
 
 def greedy_make_change(total, coin_values)
+  return [] if total == 0
+
+  coin = coin_values.find { |cn| cn <= total }
+
+  [coin] + greedy_make_change(total - coin, coin_values)
 end
 
+# p greedy_make_change(24, [10, 7, 1]) # => [10, 10, 1, 1, 1, 1]
+
+
 def make_better_change(total, coin_values)
+  return [] if total == 0
+  return nil if coin_values.none? { |coin| coin <= total }
+
+  coins = coin_values.sort.reverse
+
+  change_possibilities = []
+  coins.each_with_index do |coin, index|
+    next if coin > total
+
+    remainder = total - coin
+    best_remainder = make_better_change(remainder, coins.drop(index))
+    next if best_remainder.nil?
+
+    change_possibilities << [coin] + best_remainder
+  end
+
+  change_possibilities.min_by(&:length)
 end
+
+# p make_better_change(24, [10, 7, 1]) # => [10, 7, 7]
