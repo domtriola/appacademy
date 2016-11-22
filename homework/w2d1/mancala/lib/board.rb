@@ -16,9 +16,8 @@ class Board
   end
 
   def valid_move?(start_pos)
-    if start_pos > 13 || start_pos < 0
-      raise "Invalid starting cup"
-    end
+    raise "Invalid starting cup" if start_pos > 12 || start_pos < 0
+    raise "Invalid starting cup" if cups[start_pos].empty?
   end
 
   def make_move(start_pos, current_player_name)
@@ -43,7 +42,7 @@ class Board
 
   def next_turn(ending_cup_idx)
     return :prompt if ending_cup_idx == 6 || ending_cup_idx == 13
-    return :switch if cups[ending_cup_idx].length < 2
+    return :switch if cups[ending_cup_idx].length == 1
     ending_cup_idx
   end
 
@@ -57,15 +56,11 @@ class Board
 
   def one_side_empty?
     cups[0..5].all?(&:empty?) ||
-    cups[7..13].all?(&:empty?)
+    cups[7..12].all?(&:empty?)
   end
 
   def winner
     return :draw if cups[6] == cups[13]
-    if cups[6].length > cups[13].length
-      @name1
-    else
-      @name2
-    end
+    cups[6].length > cups[13].length ? @name1 : @name2
   end
 end
