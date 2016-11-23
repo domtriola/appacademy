@@ -8,8 +8,8 @@ look over the solutions when you're done.
 =end
 
 describe Dessert do
-  subject(:mochi) { Dessert.new('mochi', 10, 'Dom') }
-  let(:chef) { double("chef") }
+  let(:dom) { double("chef", name: "dom triola") }
+  subject(:mochi) { Dessert.new('mochi', 10, dom) }
 
   describe "#initialize" do
     it "sets a type" do
@@ -30,24 +30,50 @@ describe Dessert do
   end
 
   describe "#add_ingredient" do
-    it "adds an ingredient to the ingredients array"
+    it "adds an ingredient to the ingredients array" do
+      mochi.add_ingredient('ice cream')
+
+      expect(mochi.ingredients).to include('ice cream')
+    end
   end
 
   describe "#mix!" do
-    it "shuffles the ingredient array"
+    it "shuffles the ingredient array" do
+      ingredients = ['water', 'mochiko', 'corn starch', 'ice cream']
+
+      ingredients.each { |ingr| mochi.add_ingredient(ingr) }
+      sorted = mochi.ingredients.sort
+      mochi.mix!
+
+      expect(mochi.ingredients).not_to eq(sorted)
+    end
   end
 
   describe "#eat" do
-    it "subtracts an amount from the quantity"
+    it "subtracts an amount from the quantity" do
+      mochi.eat(3)
 
-    it "raises an error if the amount is greater than the quantity"
+      expect(mochi.quantity).to eq(7)
+    end
+
+    it "raises an error if the amount is greater than the quantity" do
+      expect { mochi.eat(20) }.to raise_error("not enough left!")
+    end
   end
 
   describe "#serve" do
-    it "contains the titleized version of the chef's name"
+    it "contains the titleized version of the chef's name" do
+      allow(dom).to receive(:titleize).and_return("Chef Dom the Great Baker")
+
+      expect(mochi.serve).to eq("Chef Dom the Great Baker has made 10 mochis!")
+    end
   end
 
   describe "#make_more" do
-    it "calls bake on the dessert's chef with the dessert passed in"
+    it "calls bake on the dessert's chef with the dessert passed in" do
+      expect(dom).to receive(:bake).with(mochi)
+
+      mochi.make_more
+    end
   end
 end
