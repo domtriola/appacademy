@@ -89,12 +89,14 @@ tile_map = {
   "left-up" => 7
 }
 
+# O(n)
 def slow_dance(dir, tiles)
   tiles.each_with_index do |tile, tentacle|
     return tentacle if tile == dir
   end
 end
 
+# O(1)
 def fast_dance(tile, tiles)
   tiles[tile]
 end
