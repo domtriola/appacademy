@@ -70,3 +70,37 @@ fishes = ['fish', 'fiiish', 'fiiiiish', 'fiiiish', 'fffish',
 p hunt_slowly(fishes)      # => 'fiiiissshhhhhh'
 p hunt_with_intent(fishes) # => 'fiiiissshhhhhh'
 p hunt_quickly(fishes)     # => 'fiiiissshhhhhh'
+
+
+# Dancing Octopus
+
+# tiles correspond to tentacles (0, 1, 2, 3, 4, 5, 6, 7)
+tiles = ["up", "right-up", "right", "right-down",
+         "down", "left-down", "left", "left-up" ]
+
+tile_map = {
+  "up" => 0,
+  "right-up" => 1,
+  "right" => 2,
+  "right-down" => 3,
+  "down" => 4,
+  "left-down" => 5,
+  "left" => 6,
+  "left-up" => 7
+}
+
+def slow_dance(dir, tiles)
+  tiles.each_with_index do |tile, tentacle|
+    return tentacle if tile == dir
+  end
+end
+
+def fast_dance(tile, tiles)
+  tiles[tile]
+end
+
+p slow_dance("up", tiles)         # => 0
+p slow_dance("right-down", tiles) # => 3
+
+p fast_dance("up", tile_map)         # => 0
+p fast_dance("right-down", tile_map) # => 3
