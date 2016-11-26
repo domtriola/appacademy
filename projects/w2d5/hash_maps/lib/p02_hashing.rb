@@ -20,13 +20,10 @@ class String
     chars_arr.each_with_index.inject(0) do |hash_int, (ord, index)|
       hash_int ^ (ord + index).hash
     end
-    # chars.inject { |hash_int, char| hash_int ^ char.ord.hash }
   end
 end
 
 class Hash
-  # This returns 0 because rspec will break if it returns nil
-  # Make sure to implement an actual Hash#hash method
   def hash
     hash_int = 0
     self.each do |key, value|
