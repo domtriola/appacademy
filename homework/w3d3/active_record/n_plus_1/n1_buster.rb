@@ -45,7 +45,16 @@ class Artist
   end
 
   def better_tracks_query
-    # TODO: your code here
+    albums = self
+      .albums
+      .select("albums.*, COUNT(*) as tracks_count")
+      .joins(:tracks)
+      .group("albums.id")
+
+    album_counts = {}
+    albums.each { |album| album_counts[album.name] = album.tracks_count }
+
+    album_counts
   end
 end
 
@@ -122,7 +131,12 @@ class House
   end
 
   def better_seeds_query
-    # TODO: your code here
+    plants = self.plants.includes(:seeds)
+
+    seeds = []
+    plants.each { |plant| seeds << plant.seeds }
+
+    seeds
   end
 end
 
@@ -181,6 +195,17 @@ class Route
   end
 
   def better_drivers_query
-    # TODO: your code here
+    buses = self.buses.includes(:drivers)
+
+    drivers = {}
+    buses.each do |bus|
+      drivers = []
+      bus.drivers.each do |driver|
+        drivers << driver.name
+      end
+      all_drivers[bus.id] = drivers
+    end
+
+    all_drivers
   end
 end
