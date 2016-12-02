@@ -36,18 +36,37 @@ class Question < ActiveRecord::Base
     result
   end
 
-  def best_results
-
-    choices = (<<-SQL)
-      -- SELECT
-      --   answer_choices.*, COUNT(*)
-      -- FROM
-      --   answer_choices
-      -- LEFT JOIN
-      --   responses ON answer_choices.id = responses.answer_choice_id
-      -- GROUP BY
-      --   answer_choices.text
-
+  def better_results
+    choices = AnswerChoice.find_by_sql([<<-SQL, id])
+      SELECT
+        answer_choices.text, COUNT(responses.id) AS response_count
+      FROM
+        answer_choices
+      LEFT JOIN
+        responses ON answer_choices.id = responses.answer_choice_id
+      WHERE
+        answer_choices.question_id = ?
+      GROUP BY
+        answer_choices.id
     SQL
+
+    choices.inject({}) do |results, choice|
+      results[choice.text] = choice.response_count
+      results
+    end
+  end
+
+  def best_results
+    choices = self.answer_choices
+      .select("answer_choices.text, COUNT(responses.id) AS response_count")
+      .joins(<<-SQL).group("answer_choices.id")
+        LEFT OUTER JOIN
+          responses ON answer_choices.id = responses.answer_choice_id
+      SQL
+
+    choices.inject({}) do |results, choice|
+      results[choice.text] = choice.response_count
+      results
+    end
   end
 end
