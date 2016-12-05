@@ -15,17 +15,13 @@ class UsersController < ApplicationController
     end
   end
 
-  def new
-    render text: "...rendered from UsersController#new"
-  end
-
-  def edit
-    render text: "...rendered from UsersController#edit"
-  end
-
   def show
-    @user = User.find(params[:id])
-    render json: @user
+    @user = User.find_by(id: params[:id])
+    if @user
+      render json: @user
+    else
+      render text: "cannot find user with id: #{params[:id]}"
+    end
   end
 
   def update
@@ -33,7 +29,7 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       render json: @user
     else
-      render text: "could not update user"
+      render json: @user.errors.full_messages, status: :unprocessable_entity
     end
   end
 
@@ -47,8 +43,8 @@ class UsersController < ApplicationController
   end
 
   private
-  
+
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:username)
   end
 end
