@@ -10,5 +10,5 @@ Rails.application.routes.draw do
   get    'users/:id' => 'users#show', as: 'user'
   patch  'users/:id' => 'users#update'
   put    'users/:id' => 'users#update'
-  delete 'users/:id' => 'users#delete'
+  delete 'users/:id' => 'users#destroy'
 end
