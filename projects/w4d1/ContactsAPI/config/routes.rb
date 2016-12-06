@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
   # Short-hand
-  resources :users, only: [:index, :show, :create, :update, :destroy]
-  resources :contacts, only: [:index, :show, :create, :update, :destroy]
+  resources :contacts, only: [:show, :create, :update, :destroy]
+  resources :contact_shares, only: [:create, :destroy]
+
+  resources :users, only: [:index, :show, :create, :update, :destroy] do
+    resources :contacts, only: [:index]
+  end
+
 
   # Long-hand
   # get    'users/'    => 'users#index'
