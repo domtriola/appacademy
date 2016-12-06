@@ -83,7 +83,7 @@
       <section>
         <form action="/reviews" method="post">
           <label for="name">Name:</label>
-          <input type="text" name="name">
+          <input id="name" type="text" name="name">
           <br>
 
           <label>Review:<br>
@@ -92,28 +92,38 @@
           <br>
           <br>
 
-          <label for="rating">Rating:</label>
-          <br>
-          <input type="radio" name="rating" value="5" checked>
-          5 Stars<br>
-          <input type="radio" name="rating" value="4">
-          4 Stars<br>
-          <input type="radio" name="rating" value="3">
-          3 Stars<br>
-          <input type="radio" name="rating" value="2">
-          2 Stars<br>
-          <input type="radio" name="rating" value="1">
-          1 Stars<br>
+          <fieldset>
+            <legend>Rating:</legend>
+            <br>
+            <label><input type="radio" name="rating" value="5" checked>
+            5 Stars</label>
+            <br>
+            <label><input type="radio" name="rating" value="4">
+            4 Stars</label>
+            <br>
+            <label><input type="radio" name="rating" value="3">
+            3 Stars</label>
+            <br>
+            <label><input type="radio" name="rating" value="2">
+            2 Stars</label>
+            <br>
+            <label><input type="radio" name="rating" value="1">
+            1 Stars</label>
+            <br>
+          </fieldset>
+
           <br>
 
-          <label for="cooking_expertise">Cooking Expertise:</label>
-          <select class="" name="cooking_expertise">
+          <label for="cooking-expertise">Cooking Expertise:</label>
+          <select id="cooking-expertise" name="Cooking Expertise">
             <option value="Sometimes Cook" selected>Sometimes Cook</option>
             <option value="Cook Everyday">Cook Everyday</option>
             <option value="Cooking is a Hobby">Cooking is a Hobby</option>
             <option value="Professional Chef">Professional Chef</option>
           </select>
         </form>
+
+        <br>
 
         <input type="submit">
       </section>
