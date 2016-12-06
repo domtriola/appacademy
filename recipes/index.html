@@ -80,6 +80,44 @@
         </div>
       </section>
 
+      <section>
+        <form action="/reviews" method="post">
+          <label for="name">Name:</label>
+          <input type="text" name="name">
+          <br>
+
+          <label>Review:<br>
+            <textarea name="review" rows="8" cols="40"></textarea>
+          </label>
+          <br>
+          <br>
+
+          <label for="rating">Rating:</label>
+          <br>
+          <input type="radio" name="rating" value="5" checked>
+          5 Stars<br>
+          <input type="radio" name="rating" value="4">
+          4 Stars<br>
+          <input type="radio" name="rating" value="3">
+          3 Stars<br>
+          <input type="radio" name="rating" value="2">
+          2 Stars<br>
+          <input type="radio" name="rating" value="1">
+          1 Stars<br>
+          <br>
+
+          <label for="cooking_expertise">Cooking Expertise:</label>
+          <select class="" name="cooking_expertise">
+            <option value="Sometimes Cook" selected>Sometimes Cook</option>
+            <option value="Cook Everyday">Cook Everyday</option>
+            <option value="Cooking is a Hobby">Cooking is a Hobby</option>
+            <option value="Professional Chef">Professional Chef</option>
+          </select>
+        </form>
+
+        <input type="submit">
+      </section>
+
       <footer>
         <p>This is my grandmother's original recipe</p>
       </footer>
