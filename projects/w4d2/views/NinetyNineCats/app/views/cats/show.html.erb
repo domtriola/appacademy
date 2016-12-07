@@ -1,0 +1,28 @@
+<h2><%= @cat.name %></h2>
+
+<table>
+  <tr>
+    <th>Birth Date</th>
+    <th>Color</th>
+    <th>Sex</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td><%= @cat.birth_date %></td>
+    <td><%= @cat.color %></td>
+    <td><%= @cat.sex %></td>
+    <td><%= @cat.description ? @cat.description : "" %></td>
+  </tr>
+</table>
+
+<% @cat.rental_requests.each do |request| %>
+  <p>Rental Status : <%= request.status %>  </p>
+  <p>Start Date : <%= request.start_date %> </p>
+  <p>End Date : <%= request.end_date %> </p>
+  <% if request.pending? %>
+    <%= button_to 'Approve', approve_cat_rental_request_url(request.id),
+        method: :post %>
+    <%= button_to 'Deny', deny_cat_rental_request_url(request.id),
+        method: :post %>
+  <% end %>
+<% end %>

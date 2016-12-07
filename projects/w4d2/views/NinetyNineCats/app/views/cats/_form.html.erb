@@ -1,0 +1,59 @@
+
+
+<% cat = @cat ? @cat : Cat.new %>
+
+<% if action == :edit %>
+  <% action_url = cat_url(cat) %>
+<% else %>
+  <% action_url = cats_url %>
+<% end %>
+
+<form action="<%= action_url %>" method="post">
+
+  <% if action == :edit %>
+    <input type="hidden" name="_method" value="PATCH">
+  <% end %>
+
+  <label for="name">Name</label>
+  <input id="name" type="text" name="cat[name]" value="<%= cat.name %>">
+
+  <br>
+
+  <label for="birth-date">Birth Date</label>
+  <input id="birth-date" type="date" name="cat[birth_date]" value="<%= cat.birth_date %>">
+
+  <br>
+
+  <label for="color">Color</label>
+  <select id="color" name="cat[color]">
+    <option disabled <%= cat.color ? "" : "selected" %>>--Please Select--</option>
+    <option value="Orange" <%= cat.color == "Orange" ? "selected" : "" %>>Orange</option>
+    <option value="Orange">Orange</option>
+    <option value="Black" <%= cat.color == "Black" ? "selected" : "" %>>Black</option>
+    <option value="White" <%= cat.color == "White" ? "selected" : "" %>>White</option>
+    <option value="Brown" <%= cat.color == "Brown" ? "selected" : "" %>>Brown</option>
+    <option value="Calico" <%= cat.color == "Calico" ? "selected" : "" %>>Calico</option>
+    <option value="Grey" <%= cat.color == "Grey" ? "selected" : "" %>>Grey</option>
+  </select>
+
+  <br>
+
+  <label for="sex">Sex</label> <br>
+  <input id="sex" type="radio" name="cat[sex]" value="M" <%= cat.sex == 'M' ? "checked" : "" %> > Male <br>
+  <input id="sex" type="radio" name="cat[sex]" value="F" <%= cat.sex == 'F' ? "checked" : "" %> > Female <br>
+
+  <br>
+
+  <label for="description">Description <br>
+    <textarea name="cat[description]" rows="8" cols="80"><%= cat.description %></textarea>
+  </label>
+
+  <br>
+
+  <% if cat.persisted? %>
+    <%= button_to 'Edit Cat', cat_url(cat), method: :patch %>
+  <% else %>
+    <%= button_to 'Add Cat', cats_url %>
+  <% end %>
+
+</form>
