@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- not tested -->
   <% if flash[:errors] %>
     <ul id="error-messages">
       <% flash[:errors].each do |error| %>
@@ -22,6 +21,8 @@
     <% if logged_in? %>
       <p>email: <%= current_user.email %></p>
       <%= button_to 'logout', logout_url, method: :delete %>
+    <% else %>
+      <%= link_to 'register', new_user_url %> | <%= link_to 'login', login_url %>
     <% end %>
   </header>
 
