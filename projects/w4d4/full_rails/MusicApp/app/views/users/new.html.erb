@@ -1,9 +1,7 @@
 <h2>Register</h2>
 
 <form action="<%= users_url %>" method="post">
-  <input type="hidden"
-         name="authenticity_token"
-         value="<%= form_authenticity_token %>">
+  <%= auth_token %>
 
   <label for="email">Email</label><br>
   <input id="email" type="text" name="user[email]">
