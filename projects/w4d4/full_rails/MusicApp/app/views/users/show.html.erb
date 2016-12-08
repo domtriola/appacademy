@@ -1,0 +1,10 @@
+<h2>Profile</h2>
+
+<%= @user.email %>
+<%= link_to 'Edit', edit_user_url(@user) %>
+<!-- <%#= button_to 'Delete', user_url(@user), method: :delete %> -->
+
+<br>
+<br>
+
+<%= link_to 'All users', users_url %>

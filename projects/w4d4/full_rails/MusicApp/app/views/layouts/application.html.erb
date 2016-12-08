@@ -8,7 +8,24 @@
 </head>
 <body>
 
-<%= yield %>
+  <!-- not tested -->
+  <% if flash[:errors] %>
+    <ul id="error-messages">
+      <% flash[:errors].each do |error| %>
+        <li><%= error %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <header>
+    <h1>Music App</h1>
+    <% if logged_in? %>
+      <p>email: <%= current_user.email %></p>
+      <%= button_to 'logout', logout_url, method: :delete %>
+    <% end %>
+  </header>
+
+  <%= yield %>
 
 </body>
 </html>
