@@ -8,4 +8,12 @@
   <% end %>
 </ul>
 
+<br>
+<br>
+
+<%= link_to 'Add track', new_band_album_track_url(@album.band.id, @album.id) %>
+
+<br>
+<br>
+
 <%= link_to 'Back to band', band_url(@album.band) %>

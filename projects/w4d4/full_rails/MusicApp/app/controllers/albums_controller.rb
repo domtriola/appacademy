@@ -14,11 +14,11 @@ class AlbumsController < ApplicationController
 
   def create
     album = Album.new(album_params)
-    if album.save
-      redirect_to album_url(album)
+    if album.save!
+      redirect_to band_url(album.band)
     else
       flash[:errors] = album.errors.full_messages
-      render :new
+      # render :new
     end
   end
 
