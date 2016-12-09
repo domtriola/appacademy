@@ -1,4 +1,6 @@
 class TracksController < ApplicationController
+  before_action :ensure_logged_in
+
   def show
     @track = Track.find_by(id: params[:id])
   end

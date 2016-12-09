@@ -1,4 +1,6 @@
 class AlbumsController < ApplicationController
+  before_action :ensure_logged_in
+
   def index
     @band = Band.find_by(id: params[:band_id])
     @albums = @band.albums
