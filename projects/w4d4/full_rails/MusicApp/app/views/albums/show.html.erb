@@ -5,6 +5,8 @@
 <ul>
   <% @album.tracks.each do |track| %>
     <li><%= link_to track.title, track_url(track) %></li>
+    <%= button_to 'delete', track_url(track), method: :delete %>
+    <br>
   <% end %>
 </ul>
 
