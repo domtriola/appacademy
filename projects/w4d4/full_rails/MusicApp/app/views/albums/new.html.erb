@@ -1,0 +1,26 @@
+<h2>Add an album to <%= @band.name %>'s collection</h2>
+
+<form action="<%= albums_url %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="album[band_id]" value="<%= @band.id %>">
+
+  <label for="title">Title</label><br>
+  <input id="title" type="text" name="album[title]">
+
+  <br>
+  <br>
+
+  <label for="recording">Recording</label><br>
+  <input id="recording"
+         type="radio"
+         name="album[recording_type]"
+         value="Studio">Studio<br>
+  <input type="radio"
+         name="album[recording_type]"
+         value="Live">Live<br>
+
+  <br>
+  <br>
+
+  <input type="submit">
+</form>

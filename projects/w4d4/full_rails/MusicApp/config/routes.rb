@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   resources :users
   resources :bands do
-    resources :albums, only: [:index, :new, :create] do
-      resources :tracks, only: [:index, :new, :create]
+    resources :albums, only: [:new] do
+      resources :tracks, only: [:new]
     end
   end
 
-  resources :albums, only: [:show, :edit, :update, :destroy]
-  resources :tracks, only: [:show, :edit, :update, :destroy]
+  resources :albums, only: [:show, :create, :edit, :update, :destroy]
+  resources :tracks, only: [:show, :create, :edit, :update, :destroy]
 
   get '/login', to: 'sessions#new', as: 'login'
   post '/login', to: 'sessions#create'
