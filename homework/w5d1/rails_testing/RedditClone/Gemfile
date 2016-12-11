@@ -55,6 +55,7 @@ group :test do
   gem 'launchy'
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
+  gem 'shoulda-matchers'
 end
 
 gem 'newrelic_rpm'
