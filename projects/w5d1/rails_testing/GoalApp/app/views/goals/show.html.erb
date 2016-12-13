@@ -1,0 +1,37 @@
+<h1><%= @goal.title %></h1>
+<br>
+<br>
+<%= link_to "Back to user", user_url(@goal.user_id)%>
+<br>
+<br>
+<%= @goal.details %><br>
+<%= @goal.private ? "private" : "public" %><br>
+<%= @goal.complete ? "completed" : "pending" %><br>
+
+
+<% if current_user.id == @goal.user_id %>
+  <%= button_to "Delete", goal_url(@goal), method: :delete %>
+<% end %>
+
+<br>
+<br>
+
+<% @goal.comments.each do |comment| %>
+  <%= comment.body %> - <%= comment.author.username %>
+  <br>
+<% end %>
+
+<br>
+<br>
+
+<form action="<%= comments_url %>" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="hidden" name="comment[type]" value="Goal">
+  <input type="hidden" name="comment[parent_id]" value="<%= @goal.id %>">
+
+  <label for="comment_body">Comment</label>
+  <br>
+  <textarea id="comment_body" name="comment[body]"></textarea>
+  <br>
+  <input type="submit" value="Submit">
+</form>

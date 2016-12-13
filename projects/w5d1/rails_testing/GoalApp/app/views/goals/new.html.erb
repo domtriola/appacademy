@@ -1,0 +1,40 @@
+<br>
+New Goal
+<br>
+<br>
+<form action="<%= goals_url %>" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+  Title:
+  <input id="goal_title" type="text" name="goal[title]" value="<%= @goal.title %>">
+
+  <br>
+
+  Details:
+  <textarea name="goal[details]" id="goal_detail"><%= @goal.details %></textarea>
+
+  <br>
+
+  Private? :
+  <input type="hidden" name="goal[private]" value="false">
+  <input type="checkbox"
+      name="goal[private]"
+      value="true"
+      <%= @goal.private ? "checked" : "" %>
+      >
+
+  <br>
+
+  Complete? :
+  <input type="hidden" name="goal[complete]" value="false">
+  <input type="checkbox"
+      name="goal[complete]"
+      value="true"
+      <%= @goal.private ? "checked" : "" %>
+      >
+
+  <br>
+
+  <input type="submit" value="Create New Goal!">
+
+</form>

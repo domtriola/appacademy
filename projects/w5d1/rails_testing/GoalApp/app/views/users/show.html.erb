@@ -1,0 +1,38 @@
+<%= @user.username %>
+
+<br>
+<br>
+
+<%= link_to "New Goal", new_goal_url %>
+
+<br>
+<br>
+
+<% @user.goals.each do |goal| %>
+  <%= link_to goal.title, goal_url(goal) %><br>
+  <%= link_to "Edit Goal", edit_goal_url(goal) %><br>
+  <br>
+<% end %>
+
+<br>
+<br>
+
+<% @user.comments.each do |comment| %>
+  <%= comment.body %> - <%= comment.author.username %>
+  <br>
+<% end %>
+
+<br>
+<br>
+
+<form action="<%= comments_url %>" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <input type="hidden" name="comment[type]" value="User">
+  <input type="hidden" name="comment[parent_id]" value="<%= @user.id %>">
+
+  <label for="comment_body">Comment</label>
+  <br>
+  <textarea id="comment_body" name="comment[body]"></textarea>
+  <br>
+  <input type="submit" value="Submit">
+</form>
