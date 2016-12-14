@@ -7,8 +7,8 @@ class ControllerBase
   attr_reader :req, :res, :params
 
   # Setup the controller
-  def initialize(req, res)
-    @req, @res = req, res
+  def initialize(req, res, params = {})
+    @req, @res, @params = req, res, params
     @already_built_response = false
   end
 
@@ -58,5 +58,6 @@ class ControllerBase
 
   # use this with the router to call action_name (:index, :show, :create...)
   def invoke_action(name)
+    self.send(name)
   end
 end
