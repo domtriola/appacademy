@@ -22,7 +22,7 @@ class ControllerBase
     raise "Cannot render or redirect twice" if already_built_response?
     @res.location = url
     @res.status = 302
-    @session.store_session(@res)
+    @session.store_session(@res) if @session
     @already_built_response = true
   end
 
@@ -33,7 +33,7 @@ class ControllerBase
     raise "Cannot render or redirect twice" if already_built_response?
     @res['Content-Type'] = content_type
     @res.write(content)
-    @session.store_session(@res)
+    @session.store_session(@res) if @session
     @already_built_response = true
   end
 
@@ -47,7 +47,7 @@ class ControllerBase
     template = ERB.new(html_erb)
     @res.write(template.result(binding))
     @res['Content-Type'] = "text/html"
-    @session.store_session(@res)
+    @session.store_session(@res) if @session
     @already_built_response = true
   end
 
