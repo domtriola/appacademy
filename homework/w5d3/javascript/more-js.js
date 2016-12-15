@@ -71,3 +71,23 @@ herd.forEach(elephant => console.log(elephant.paradeHelper()));
 // undefined
 // Pinky is trotting by!
 // undefined
+
+
+// Closures
+
+function dinerBreakfast() {
+  let order = "I'd like cheesy scrambled eggs";
+  console.log(order + " please");
+
+  return function(item) {
+    order += " " + item;
+    return `${order} please`;
+  };
+}
+
+let bfastOrder = dinerBreakfast();
+// I'd like cheesy scrambled eggs please
+console.log(bfastOrder("chocolate chip pancakes"));
+// "I'd like cheesy scrambled eggs and chocolate chip pancakes please."
+console.log(bfastOrder("grits"));
+// "I'd like cheesy scrambled eggs and chocolate chip pancakes and grits please."
