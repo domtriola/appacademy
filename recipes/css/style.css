@@ -32,3 +32,26 @@ li a {
   text-decoration: none;
   color: inherit;
 }
+
+input[type="radio"],
+input[type="submit"],
+select {
+  cursor: pointer;
+  outline: none;
+}
+
+input:last-child {
+  background-color: gold;
+}
+
+input:last-child:hover {
+  -webkit-filter: brightness(90%);
+}
+
+#directions li:nth-of-type(2n) {
+  background-color: whitesmoke;
+}
+
+h2 + .user_review {
+    border-top: 1px solid black;
+}
