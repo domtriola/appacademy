@@ -21,7 +21,7 @@
     <header>
       <img src="images/aa-logo.png" alt="App Academy logo" width=25>
       <nav id="menu">
-        <ul class="ingredients-list">
+        <ul>
           <li><a href="#description">Description</a></li>
           <li><a href="#ingredients">Ingredients</a></li>
           <li><a href="#directions">Directions</a></li>
@@ -29,13 +29,14 @@
       </nav>
     </header>
 
+
     <main>
       <h1>Soy Lemon Salmon</h1>
 
       <aside id="ingredients">
         <h2>Ingredients</h2>
 
-        <ul>
+        <ul class="ingredients-list">
           <li>Salmon</li>
           <li>Soy Sauce</li>
           <li>Lemon</li>
@@ -46,7 +47,7 @@
         </ul>
       </aside>
 
-      <section>
+      <section id="content">
         <div id="description">
           <h2>Description</h2>
 
@@ -73,7 +74,7 @@
         <div id="directions">
           <h2>Directions</h2>
 
-          <ol>
+          <ol class="directions">
             <li>Start brown rice first</li>
             <li>Chop garlic
               <a href="http://www.whfoods.com/genpage.php?tname=george&dbid=136">
@@ -110,36 +111,24 @@
           <br>
 
           <fieldset>
-            <legend>Rating:</legend>
-            <br>
             <label><input type="radio" name="rating" value="5" checked>
             5 Stars</label>
-            <br>
             <label><input type="radio" name="rating" value="4">
             4 Stars</label>
-            <br>
             <label><input type="radio" name="rating" value="3">
             3 Stars</label>
-            <br>
             <label><input type="radio" name="rating" value="2">
             2 Stars</label>
-            <br>
             <label><input type="radio" name="rating" value="1">
             1 Stars</label>
-            <br>
           </fieldset>
 
-          <br>
-
-          <label for="expertise">Cooking Expertise:</label>
           <select id="expertise" name="Cooking Expertise">
             <option value="Sometimes Cook" selected>Sometimes Cook</option>
             <option value="Cook Everyday">Cook Everyday</option>
             <option value="Cooking is a Hobby">Cooking is a Hobby</option>
             <option value="Professional Chef">Professional Chef</option>
           </select>
-
-          <br>
 
           <input type="submit">
         </form>

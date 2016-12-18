@@ -1,7 +1,12 @@
+/* General
+**************/
+
 body {
   font-family: Arial, sans-serif;
   background: #ededed;
-  margin: 0 20px;
+  padding: 20px;
+  width: 900px;
+  margin: 0 auto;
 }
 
 header > img {
@@ -20,10 +25,6 @@ ul, ol {
   margin-left: 20px;
 }
 
-.ingredients-list {
-  list-style: square-inside;
-}
-
 ol {
   list-style-type: upper-roman;
 }
@@ -31,6 +32,11 @@ ol {
 li a {
   text-decoration: none;
   color: inherit;
+}
+
+input {
+  display: block;
+  margin: 10px 0;
 }
 
 input[type="radio"],
@@ -48,10 +54,64 @@ input:last-child:hover {
   -webkit-filter: brightness(90%);
 }
 
+select {
+  margin: 10px 0;
+}
+
+/* Header
+*****************/
+
+header img,
+nav,
+nav li {
+  display: inline-block;
+}
+
+header img {
+  width: 50px;
+}
+
+/* Main Content
+*****************/
+
+#content {
+  width: 700px;
+  display: inline-block;
+}
+
+aside {
+  width: 180px;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 15px;
+}
+
+.ingredients-list li,
+.directions li {
+  margin: 15px 0;
+}
+
 #directions li:nth-of-type(2n) {
   background-color: whitesmoke;
 }
 
+/* Reviews
+***************/
+
 h2 + .user_review {
     border-top: 1px solid black;
+}
+
+fieldset input {
+  display: inline;
+}
+fieldset label {
+  display: block;
+}
+
+/* Footer
+**************/
+
+footer {
+  margin-top: 40px;
 }
