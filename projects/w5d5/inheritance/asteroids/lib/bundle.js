@@ -143,7 +143,10 @@
 	  this.allObjects().forEach(object => object.draw(ctx));
 	};
 	Game.prototype.moveObjects = function() {
-	  this.allObjects().forEach(object => object.move());
+	  this.allObjects().forEach(object => {
+	    object.move();
+	    this.handleOutOfBounds(object);
+	  });
 	  this.checkCollisions();
 	};
 	Game.prototype.checkCollisions = function() {
@@ -154,6 +157,15 @@
 	        object.isCollidedWith(object2);
 	    });
 	  });
+	};
+	Game.prototype.handleOutOfBounds = function(obj) {
+	  if (obj.pos[0] > Game.DIM_X || obj.pos[0] < 0 ||
+	      obj.pos[1] > Game.DIM_Y || obj.pos[1] < 0) {
+	    if (!obj.isWrappable)
+	      this.destroy(obj);
+	    else
+	      obj.wrap();
+	  }
 	};
 	Game.prototype.destroy = function(obj) {
 	  if (obj instanceof Bullet)
@@ -268,21 +280,22 @@
 	  ctx.fill();
 	};
 	MovingObject.prototype.move = function() {
-	  if (this.pos[0] + this.vel[0] > 600)
-	  this.pos[0] = 0;
-	  else if (this.pos[0] + this.vel[0] < 0)
-	  this.pos[0] = 600;
-	  else
 	  this.pos[0] += this.vel[0];
+	  this.pos[1] += this.vel[1];
+	};
+	MovingObject.prototype.wrap = function() {
+	  if (this.pos[0] > 600)
+	    this.pos[0] = 0;
+	  else if (this.pos[0] < 0)
+	    this.pos[0] = 600;
 
-	  if (this.pos[1] + this.vel[1] > 600)
+	  if (this.pos[1] > 600)
 	    this.pos[1] = 0;
-	  else if (this.pos[1] + this.vel[1] < 0)
+	  else if (this.pos[1] < 0)
 	    this.pos[1] = 600;
-	  else
-	    this.pos[1] += this.vel[1];
 	};
 	MovingObject.prototype.isCollidedWith = function(otherObject) {};
+	MovingObject.prototype.isWrappable = true;
 
 	module.exports = MovingObject;
 
@@ -346,6 +359,8 @@
 	  MovingObject.call(this, opts);
 	}
 	Util.inherits(Bullet, MovingObject);
+
+	Bullet.prototype.isWrappable = false;
 
 	module.exports = Bullet;
 

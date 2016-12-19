@@ -6,4 +6,6 @@ function Bullet(opts) {
 }
 Util.inherits(Bullet, MovingObject);
 
+Bullet.prototype.isWrappable = false;
+
 module.exports = Bullet;

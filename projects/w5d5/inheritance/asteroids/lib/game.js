@@ -34,7 +34,10 @@ Game.prototype.draw = function(ctx) {
   this.allObjects().forEach(object => object.draw(ctx));
 };
 Game.prototype.moveObjects = function() {
-  this.allObjects().forEach(object => object.move());
+  this.allObjects().forEach(object => {
+    object.move();
+    this.handleOutOfBounds(object);
+  });
   this.checkCollisions();
 };
 Game.prototype.checkCollisions = function() {
@@ -45,6 +48,15 @@ Game.prototype.checkCollisions = function() {
         object.isCollidedWith(object2);
     });
   });
+};
+Game.prototype.handleOutOfBounds = function(obj) {
+  if (obj.pos[0] > Game.DIM_X || obj.pos[0] < 0 ||
+      obj.pos[1] > Game.DIM_Y || obj.pos[1] < 0) {
+    if (!obj.isWrappable)
+      this.destroy(obj);
+    else
+      obj.wrap();
+  }
 };
 Game.prototype.destroy = function(obj) {
   if (obj instanceof Bullet)
