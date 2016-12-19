@@ -35,9 +35,6 @@ MovingObject.prototype.move = function() {
   else
     this.pos[1] += this.vel[1];
 };
-MovingObject.prototype.isCollidedWith = function(otherObject) {
-  let dist = Util.dist(this.pos, otherObject.pos);
-  return (dist < (this.radius + otherObject.radius));
-};
+MovingObject.prototype.isCollidedWith = function(otherObject) {};
 
 module.exports = MovingObject;

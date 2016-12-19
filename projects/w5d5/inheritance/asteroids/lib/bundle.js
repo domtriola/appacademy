@@ -91,6 +91,9 @@
 	Game.DIM_Y = 600;
 	Game.NUM_ASTEROIDS = 10;
 
+	Game.prototype.allObjects = function() {
+	  return [this.ship].concat(this.asteroids);
+	};
 	Game.prototype.addAsteroids = function() {
 	  this.asteroids = [];
 	  for (let i = 0; i < Game.NUM_ASTEROIDS; i++) {
@@ -101,30 +104,20 @@
 	};
 	Game.prototype.draw = function(ctx) {
 	  ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
-	  console.log(this.ship);
-	  this.ship.draw(ctx);
-	  this.asteroids.forEach(asteroid => asteroid.draw(ctx));
+	  this.allObjects().forEach(object => object.draw(ctx));
 	};
 	Game.prototype.moveObjects = function() {
-	  this.ship.move();
-	  this.asteroids.forEach(asteroid => asteroid.move());
+	  this.allObjects().forEach(objects => objects.move());
 	  this.checkCollisions();
 	};
 
 	Game.prototype.checkCollisions = function() {
 	  let toBeDestroyed = [];
-	  this.asteroids.forEach((asteroid, i) => {
-	    this.asteroids.forEach((asteroid2, j) => {
-	      if ((i !== j) && (asteroid.isCollidedWith(asteroid2))){
-	        // toBeDestroyed.push(asteroid, asteroid2);
-	      }
+	  this.allObjects().forEach((object, i) => {
+	    this.allObjects().forEach((object2, j) => {
+	      if (i !== j)
+	        object.isCollidedWith(object2);
 	    });
-	  });
-	  toBeDestroyed.forEach(asteroid => {
-	    let idx = this.asteroids.indexOf(asteroid);
-	    if (idx > -1) {
-	      this.asteroids.splice(idx, 1);
-	    }
 	  });
 	};
 
@@ -173,6 +166,7 @@
 
 	const Util = __webpack_require__(3);
 	const MovingObject = __webpack_require__(5);
+	const Ship = __webpack_require__(6);
 
 	function Asteroid(pos) {
 	  MovingObject.call(this, {
@@ -187,6 +181,13 @@
 
 	Asteroid.COLOR = "darksalmon";
 	Asteroid.RADIUS = 20;
+
+	Asteroid.prototype.isCollidedWith = function(otherObject) {
+	  let dist = Util.dist(this.pos, otherObject.pos);
+	  if (otherObject instanceof Ship
+	      && dist < (this.radius + otherObject.radius))
+	    otherObject.relocate();
+	};
 
 	module.exports = Asteroid;
 
@@ -232,10 +233,7 @@
 	  else
 	    this.pos[1] += this.vel[1];
 	};
-	MovingObject.prototype.isCollidedWith = function(otherObject) {
-	  let dist = Util.dist(this.pos, otherObject.pos);
-	  return (dist < (this.radius + otherObject.radius));
-	};
+	MovingObject.prototype.isCollidedWith = function(otherObject) {};
 
 	module.exports = MovingObject;
 
@@ -249,7 +247,7 @@
 
 	function Ship() {
 	  MovingObject.call(this, {
-	    pos: [300, 300],
+	    pos: Util.randomPos(600, 600),
 	    vel: [0, 0],
 	    color: Ship.COLOR,
 	    radius: Ship.RADIUS
@@ -259,6 +257,11 @@
 
 	Ship.COLOR = "teal";
 	Ship.RADIUS = 15;
+
+	Ship.prototype.relocate = function() {
+	  this.pos = Util.randomPos(600, 600);
+	  this.vel = [0, 0];
+	};
 
 	module.exports = Ship;
 
