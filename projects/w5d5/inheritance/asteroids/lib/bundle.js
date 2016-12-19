@@ -64,12 +64,29 @@
 	function GameView(ctx) {
 	  this.ctx = ctx;
 	  this.game = new Game();
+	  this.ship = this.game.addShip();
 	}
 	GameView.prototype.start = function() {
+	  this.bindKeyHandlers();
 	  setInterval(() => {
 	    this.game.moveObjects();
 	    this.game.draw(this.ctx);
 	  }, 20);
+	};
+
+	GameView.DIRS = {
+	  "w": [0, -1],
+	  "a": [-1, 0],
+	  "s": [0, 1],
+	  "d": [1, 0]
+	};
+	GameView.prototype.bindKeyHandlers = function() {
+	  Object.keys(GameView.DIRS).forEach(dir => {
+	    let move = GameView.DIRS[dir];
+	    key(dir, () => {
+	      this.ship.power(move);
+	    });
+	  });
 	};
 
 	module.exports = GameView;
@@ -85,12 +102,15 @@
 
 	function Game() {
 	  this.addAsteroids();
-	  this.ship = new Ship();
 	}
 	Game.DIM_X = 600;
 	Game.DIM_Y = 600;
 	Game.NUM_ASTEROIDS = 10;
 
+	Game.prototype.addShip = function() {
+	  this.ship = new Ship();
+	  return this.ship;
+	};
 	Game.prototype.allObjects = function() {
 	  return [this.ship].concat(this.asteroids);
 	};
@@ -261,6 +281,10 @@
 	Ship.prototype.relocate = function() {
 	  this.pos = Util.randomPos(600, 600);
 	  this.vel = [0, 0];
+	};
+	Ship.prototype.power = function(impulse) {
+	  this.vel[0] += impulse[0];
+	  this.vel[1] += impulse[1];
 	};
 
 	module.exports = Ship;

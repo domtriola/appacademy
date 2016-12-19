@@ -4,12 +4,15 @@ const Ship = require('./ship.js');
 
 function Game() {
   this.addAsteroids();
-  this.ship = new Ship();
 }
 Game.DIM_X = 600;
 Game.DIM_Y = 600;
 Game.NUM_ASTEROIDS = 10;
 
+Game.prototype.addShip = function() {
+  this.ship = new Ship();
+  return this.ship;
+};
 Game.prototype.allObjects = function() {
   return [this.ship].concat(this.asteroids);
 };
