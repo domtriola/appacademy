@@ -47,7 +47,10 @@ Game.prototype.checkCollisions = function() {
   });
 };
 Game.prototype.destroy = function(obj) {
-  // console.log(obj);
+  if (obj instanceof Bullet)
+    this.bullets.splice(this.bullets.indexOf(obj), 1);
+  else if (obj instanceof Asteroid)
+    this.asteroids.splice(this.asteroids.indexOf(obj), 1);
 };
 
 module.exports = Game;

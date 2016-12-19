@@ -24,8 +24,10 @@ Asteroid.prototype.isCollidedWith = function(otherObject) {
       && dist < (this.radius + otherObject.radius))
     otherObject.relocate();
   else if (otherObject instanceof Bullet
-           && dist < (this.radius + otherObject.radius))
+           && dist < (this.radius + otherObject.radius)) {
+    this.game.destroy(otherObject);
     this.game.destroy(this);
+  }
 };
 
 module.exports = Asteroid;

@@ -156,7 +156,10 @@
 	  });
 	};
 	Game.prototype.destroy = function(obj) {
-	  // console.log(obj);
+	  if (obj instanceof Bullet)
+	    this.bullets.splice(this.bullets.indexOf(obj), 1);
+	  else if (obj instanceof Asteroid)
+	    this.asteroids.splice(this.asteroids.indexOf(obj), 1);
 	};
 
 	module.exports = Game;
@@ -228,8 +231,10 @@
 	      && dist < (this.radius + otherObject.radius))
 	    otherObject.relocate();
 	  else if (otherObject instanceof Bullet
-	           && dist < (this.radius + otherObject.radius))
+	           && dist < (this.radius + otherObject.radius)) {
+	    this.game.destroy(otherObject);
 	    this.game.destroy(this);
+	  }
 	};
 
 	module.exports = Asteroid;
