@@ -1,13 +1,15 @@
 const Util = require('./utils.js');
 const MovingObject = require('./moving_object.js');
 const Ship = require('./ship.js');
+const Bullet = require('./bullet.js');
 
-function Asteroid(pos) {
+function Asteroid(game, pos) {
   MovingObject.call(this, {
     pos: pos,
     vel: Util.randomVec(2),
     color: Asteroid.COLOR,
-    radius: Asteroid.RADIUS
+    radius: Asteroid.RADIUS,
+    game: game
   });
 }
 
@@ -21,6 +23,9 @@ Asteroid.prototype.isCollidedWith = function(otherObject) {
   if (otherObject instanceof Ship
       && dist < (this.radius + otherObject.radius))
     otherObject.relocate();
+  else if (otherObject instanceof Bullet
+           && dist < (this.radius + otherObject.radius))
+    this.game.destroy(this);
 };
 
 module.exports = Asteroid;

@@ -5,6 +5,7 @@ function MovingObject(opts = {}) {
   this.vel = opts.vel;
   this.radius = opts.radius;
   this.color = opts.color;
+  this.game = opts.game;
 }
 MovingObject.prototype.draw = function(ctx) {
   ctx.fillStyle = this.color;
