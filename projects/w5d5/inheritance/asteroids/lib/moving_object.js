@@ -20,6 +20,21 @@ MovingObject.prototype.draw = function(ctx) {
 
   ctx.fill();
 };
+MovingObject.prototype.move = function() {
+  if (this.pos[0] + this.vel[0] > 600)
+  this.pos[0] = 0;
+  else if (this.pos[0] + this.vel[0] < 0)
+  this.pos[0] = 600;
+  else
+  this.pos[0] += this.vel[0];
+
+  if (this.pos[1] + this.vel[1] > 600)
+    this.pos[1] = 0;
+  else if (this.pos[1] + this.vel[1] < 0)
+    this.pos[1] = 600;
+  else
+    this.pos[1] += this.vel[1];
+};
 MovingObject.prototype.isCollidedWith = function(otherObject) {
   let dist = Util.dist(this.pos, otherObject.pos);
   return (dist < (this.radius + otherObject.radius));
