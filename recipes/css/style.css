@@ -85,6 +85,31 @@ header img {
   float: left;
 }
 
+.main-nav {
+  display: none;
+}
+
+.hamburger-dropdown {
+  background: url(../images/hamburger.png);
+  background-size: 50px;
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+
+.hamburger-dropdown ul {
+  position: absolute;
+  top: 20px;
+  left: -50px;
+  top: 50px;
+  background-color: #fff;
+  display: none;
+}
+
+.hamburger-dropdown:hover ul {
+    display: block;
+ }
+
 /* Main Content
 *****************/
 
@@ -134,4 +159,17 @@ fieldset label {
 
 footer {
   margin-top: 40px;
+}
+
+/* Media Queries
+******************/
+
+@media screen and (min-width: 700px) {
+  .main-nav {
+    display: inline-block;
+  }
+
+  .hamburger-dropdown {
+    display: none;
+  }
 }
