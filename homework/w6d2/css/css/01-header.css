@@ -4,7 +4,7 @@ body {
   /* Write your css here... */
   font-family: sans-serif;
   font-weight: 400;
-  font-size: 14px;
+  font-size: 16px;
   background: #eee;
 }
 
@@ -21,7 +21,6 @@ body {
 
 .header-nav {
   width: 900px;
-  border-bottom: 1px solid #ccc;
   border-left: 1px solid #ccc;
   border-right: 1px solid #ccc;
   margin: 0 auto;
