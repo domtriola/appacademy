@@ -1,0 +1,52 @@
+/* General
+***********/
+
+h1 {
+  text-align: center;
+}
+
+/* Board
+***********/
+
+.hanoi {
+  width: 600px;
+  margin: 40px auto 0 auto;
+}
+
+.pile {
+  display: flex;
+  flex-direction: column-reverse;
+  float: left;
+  padding: 0;
+  width: 150px;
+  height: 66px;
+  border-bottom: 4px solid black;
+  margin: 0 25px;
+  cursor: pointer;
+  vertical-align: bottom;
+}
+
+.pile:hover {
+  border-bottom: 4px solid #d3d6e2;
+}
+
+.disc {
+  height: 20px;
+  border-radius: 50px;
+  background-color: salmon;
+  list-style-type: none;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.disc[data-size= '1'] {
+  width: 50px;
+}
+
+.disc[data-size= '2'] {
+  width: 70px;
+}
+
+.disc[data-size= '3'] {
+  width: 90px;
+}

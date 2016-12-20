@@ -1,0 +1,43 @@
+/* General
+***********/
+h1 {
+  text-align: center;
+}
+
+.group:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+/* Board
+***********/
+
+.ttt ul {
+  width: 600px;
+  border: 1px solid black;
+  padding-left: 0;
+  margin: 0 auto;
+}
+
+.tile {
+  font-family: arial;
+  float: left;
+  background-color: #ddd;
+  list-style: none;
+  width: 200px;
+  height: 200px;
+  border: 1px solid black;
+  text-align: center;
+  font-size: 115px;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.tile.clicked {
+  background-color: #fdfdfd;
+}
+
+.tile:hover {
+  background-color: yellow;
+}
