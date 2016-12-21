@@ -1,0 +1,101 @@
+.masthead {
+	border-bottom: 2px solid black;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	position: relative;
+}
+
+.language-nav {
+	position: relative;
+	top: -15px;
+	background: white;
+	border: 1px solid $light-gray;
+	border-bottom: none;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	display: flex;
+	width: 178px;
+}
+
+.language-nav a {
+	flex-direction: row;
+	margin: 0 5px;
+	text-transform: uppercase;
+	font-family: $sans-serif;
+	font-size: 10px;
+	color: $dark-gray;
+}
+
+.language-nav a:hover {
+	text-decoration: underline;
+}
+
+.language-nav li:first-child {
+	font-weight: 700;
+}
+
+.language-nav ul {
+	display: flex;
+}
+
+.logo {
+	max-width: 400px;
+	margin-top: 10px;
+	margin: 0 auto;
+}
+
+.masthead-links {
+	display: flex;
+	font-family: $sans-serif;
+	font-size: 11px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	justify-content: center;
+}
+
+.masthead-links li {
+	margin-left: 10px;
+	border-right: 1px solid $light-gray;
+}
+
+.masthead-links li:last-child {
+	border-right: none;
+}
+
+.masthead-links button {
+	background: none;
+	padding: 0px;
+	color: #000;
+	font-weight: normal;
+	border: none;
+}
+
+.masthead-links button:hover {
+	background-color: $lightest-gray;
+}
+
+.masthead-links a,
+.masthead-links button,
+.masthead-links time {
+	margin-right: 10px;
+}
+
+.masthead-links i {
+	margin-right: 5px;
+}
+
+.masthead-links strong {
+	color: green;
+}
+
+.masthead-links li:nth-child(n + 4) a:hover {
+	color: gray;
+}
+.masthead-links li:nth-child(n + 2):nth-child(-n + 3) a:hover {
+	text-decoration: underline;
+}
+
+.masthead-links span {
+	color: green;
+}
