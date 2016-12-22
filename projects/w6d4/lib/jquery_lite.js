@@ -42,12 +42,31 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const DOMNodeCollection = __webpack_require__(1);
+
+	window.$l = function(arg) {
+	  if (arg instanceof HTMLElement)
+	    return new DOMNodeCollection([arg]);
+
+	  let list = document.querySelectorAll(arg);
+	  list = Array.prototype.slice.call(list, 0);
+	  return new DOMNodeCollection(list);
+	};
+
+
+/***/ },
+/* 1 */
 /***/ function(module, exports) {
 
-	window.$l = function(selector) {
-	  const list = document.querySelectorAll(selector);
-	  return Array.prototype.slice.call(list, 0);
-	};
+	class DOMNodeCollection {
+	  constructor(HTMLElements) {
+	    this.HTMLElements = HTMLElements;
+	  }
+	}
+
+	module.exports = DOMNodeCollection;
 
 
 /***/ }
