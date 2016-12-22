@@ -100,9 +100,20 @@
 	    }
 	  }
 
-	  attr() {}
-	  addClass() {}
-	  removeClass() {}
+	  attr(attribute, value) {
+	    if (value === undefined)
+	      return this.HTMLElements[0].getAttribute(attribute);
+	    else
+	      this.HTMLElements.forEach(el => el.setAttribute(attribute, value));
+	  }
+
+	  addClass(className) {
+	    this.HTMLElements.forEach(el => el.classList.add(className));
+	  }
+
+	  removeClass(className) {
+	    this.HTMLElements.forEach(el => el.classList.remove(className));
+	  }
 	}
 
 	module.exports = DOMNodeCollection;

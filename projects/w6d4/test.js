@@ -8,6 +8,7 @@ $(() => {
 
 
   // jQuery Lite Tests
+  let poem = $l('#one-fish-two-fish');
   let stanza = $l('.stanza');
   let verses = $l('.stanza li');
   let oneFish = verses.HTMLElements[0];
@@ -16,4 +17,10 @@ $(() => {
   // stanza.append($l(stanza.HTMLElements[0]));
   // stanza.append(stanza);
   // stanza.append(verses);
+
+  // console.log(poem.attr("class"));
+  // verses.attr("class", "verse");
+
+  // verses.addClass("verse");
+  // verses.removeClass("verse");
 });
