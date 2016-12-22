@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   // toggling restaurants
-
-  const toggleLi = (e) => {
+  const toggleLi = e => {
     const li = e.target;
     if (li.className === "visited") {
       li.className = "";
@@ -17,9 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // adding SF places as list items
-
-  // --- your code here!
-  const addNewPlace = (e) => {
+  const addNewPlace = e => {
     e.preventDefault();
     const sfPlaces = document.getElementById("sf-places");
     const newPlace = document.createElement("li");
@@ -33,9 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   // adding new photos
+  let photoForm = document.querySelector(".photo-form-container");
+  const showPhotoForm = document.querySelector(".photo-show-button");
+  showPhotoForm.addEventListener("click", e => {
+    e.preventDefault();
+    photoForm.classList.toggle("hidden");
+  });
 
-  // --- your code here!
-
-
-
+  const photoList = document.querySelector(".dog-photos");
+  const addPhotoButton = document.querySelector(".photo-url-submit");
+  addPhotoButton.addEventListener("click", e => {
+    e.preventDefault();
+    let li = document.createElement("li");
+    let img = document.createElement("img");
+    img.src = document.querySelector(".photo-url-input").value;
+    li.appendChild(img);
+    photoList.appendChild(li);
+  });
 });
