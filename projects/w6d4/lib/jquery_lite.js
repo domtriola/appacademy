@@ -147,9 +147,7 @@
 	  }
 
 	  remove() {
-	    this.HTMLElements.forEach(node => {
-	      node.remove();
-	    });
+	    this.HTMLElements.forEach(node => node.remove());
 	  }
 	}
 
