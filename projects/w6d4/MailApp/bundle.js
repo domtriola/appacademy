@@ -45,6 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const Router = __webpack_require__(1);
+	const Inbox = __webpack_require__(2);
 
 	document.addEventListener("DOMContentLoaded", () => {
 	  initializeButtons();
@@ -63,9 +64,13 @@
 
 	function initializeRouter() {
 	  const content = document.querySelector('.content');
-	  const router = new Router(content);
+	  const router = new Router(content, routes);
 	  router.start();
 	}
+
+	const routes = {
+	  inbox: Inbox
+	};
 
 
 /***/ },
@@ -73,8 +78,9 @@
 /***/ function(module, exports) {
 
 	class Router {
-	  constructor(node) {
+	  constructor(node, routes) {
 	    this.node = node;
+	    this.routes = routes;
 	  }
 
 	  start() {
@@ -83,19 +89,36 @@
 	  }
 
 	  render() {
+	    let component = this.activeRoute();
+
 	    this.node.innerHTML = "";
-	    let newNode = document.createElement("p");
-	    newNode.innerHTML = this.activeRoute();
-	    this.node.append(newNode);
+	    if (component !== undefined)
+	      this.node.appendChild(component.render());
 	  }
 
 	  activeRoute() {
 	    let hashFragment = window.location.hash;
-	    return hashFragment.slice(1);
+	    return this.routes[hashFragment.slice(1)];
 	  }
 	}
 
 	module.exports = Router;
+
+
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
+
+	const Inbox = {
+	  render: function() {
+	    const container = document.createElement('ul');
+	    container.className = "messages";
+	    container.innerHTML = "An Inbox Message";
+	    return container;
+	  }
+	};
+
+	module.exports = Inbox;
 
 
 /***/ }

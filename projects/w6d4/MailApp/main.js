@@ -1,4 +1,5 @@
 const Router = require('./router.js');
+const Inbox = require('./Inbox.js');
 
 document.addEventListener("DOMContentLoaded", () => {
   initializeButtons();
@@ -17,6 +18,10 @@ function initializeButtons() {
 
 function initializeRouter() {
   const content = document.querySelector('.content');
-  const router = new Router(content);
+  const router = new Router(content, routes);
   router.start();
 }
+
+const routes = {
+  inbox: Inbox
+};
