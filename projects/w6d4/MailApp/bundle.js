@@ -45,7 +45,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const Router = __webpack_require__(1);
-	const Inbox = __webpack_require__(2);
+	const Inbox = __webpack_require__(4);
+	const Sent = __webpack_require__(5);
 
 	document.addEventListener("DOMContentLoaded", () => {
 	  initializeButtons();
@@ -70,7 +71,8 @@
 	}
 
 	const routes = {
-	  inbox: Inbox
+	  inbox: Inbox,
+	  sent: Sent
 	};
 
 
@@ -107,7 +109,41 @@
 
 
 /***/ },
-/* 2 */
+/* 2 */,
+/* 3 */
+/***/ function(module, exports) {
+
+	const messages = {
+	  sent: [
+	    {to: "friend@mail.com", subject: "Check this out", body: "It's so cool"},
+	    {to: "person@mail.com", subject: "zzz", body: "so booring"}
+	  ],
+
+	  inbox: [
+	    {from: "grandma@mail.com",
+	     subject: "Fwd: Fwd: Fwd: Check this out",
+	     body: "Stay at home mom discovers cure for leg cramps. Doctors hate her"},
+	    {from: "person@mail.com",
+	     subject: "Questionnaire",
+	     body: "Take this free quiz win $1000 dollars"}
+	  ]
+	};
+
+	const MessageStore = {
+	  getInboxMessages: function() {
+	    return messages.inbox;
+	  },
+
+	  getSentMessages: function() {
+	    return messages.sent;
+	  }
+	};
+
+	module.exports = MessageStore;
+
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	const MessageStore = __webpack_require__(3);
@@ -142,36 +178,38 @@
 
 
 /***/ },
-/* 3 */
-/***/ function(module, exports) {
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
 
-	const messages = {
-	  sent: [
-	    {to: "friend@mail.com", subject: "Check this out", body: "It's so cool"},
-	    {to: "person@mail.com", subject: "zzz", body: "so booring"}
-	  ],
+	const MessageStore = __webpack_require__(3);
 
-	  inbox: [
-	    {from: "grandma@mail.com",
-	     subject: "Fwd: Fwd: Fwd: Check this out",
-	     body: "Stay at home mom discovers cure for leg cramps. Doctors hate her"},
-	    {from: "person@mail.com",
-	     subject: "Questionnaire",
-	     body: "Take this free quiz win $1000 dollars"}
-	  ]
-	};
+	const Sent = {
+	  render: function() {
+	    const container = document.createElement('ul');
+	    container.className = "messages";
 
-	const MessageStore = {
-	  getInboxMessages: function() {
-	    return messages.inbox;
+	    const messages = MessageStore.getSentMessages();
+	    messages.forEach(message => {
+	      let node = this.renderMessage(message);
+	      container.appendChild(node);
+	    });
+
+	    return container;
 	  },
 
-	  getSentMessages: function() {
-	    return messages.sent;
+	  renderMessage: function(message) {
+	    const messageNode = document.createElement('li');
+	    messageNode.className = "message";
+	    messageNode.innerHTML =
+	      `<span class="to">To: ${message.to}</span>
+	       <span class="subject">${message.subject}</span>
+	       <span class="body">${message.body}</span>`;
+
+	    return messageNode;
 	  }
 	};
 
-	module.exports = MessageStore;
+	module.exports = Sent;
 
 
 /***/ }
