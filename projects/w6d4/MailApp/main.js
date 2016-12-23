@@ -1,4 +1,11 @@
-document.addEventListener("DOMContentLoaded", function() {
+const Router = require('./router.js');
+
+document.addEventListener("DOMContentLoaded", () => {
+  initializeButtons();
+  initializeRouter();
+});
+
+function initializeButtons() {
   const sidebarItems = document.querySelectorAll(".sidebar-nav li");
   sidebarItems.forEach(item => {
     item.addEventListener("click", (e) => {
@@ -6,4 +13,10 @@ document.addEventListener("DOMContentLoaded", function() {
       window.location.hash = innerText;
     });
   });
-});
+}
+
+function initializeRouter() {
+  const content = document.querySelector('.content');
+  const router = new Router(content);
+  router.start();
+}
