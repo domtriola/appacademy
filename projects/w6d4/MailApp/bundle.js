@@ -50,6 +50,7 @@
 	document.addEventListener("DOMContentLoaded", () => {
 	  initializeButtons();
 	  initializeRouter();
+	  location.hash = "#inbox";
 	});
 
 	function initializeButtons() {
@@ -107,18 +108,70 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
+
+	const MessageStore = __webpack_require__(3);
 
 	const Inbox = {
 	  render: function() {
 	    const container = document.createElement('ul');
 	    container.className = "messages";
-	    container.innerHTML = "An Inbox Message";
+
+	    const messages = MessageStore.getInboxMessages();
+	    messages.forEach(message => {
+	      let node = this.renderMessage(message);
+	      container.appendChild(node);
+	    });
+
 	    return container;
+	  },
+
+	  renderMessage: function(message) {
+	    const messageNode = document.createElement('li');
+	    messageNode.className = "message";
+	    messageNode.innerHTML =
+	      `<span class="from">${message.from}</span>
+	       <span class="subject">${message.subject}</span>
+	       <span class="body">${message.body}</span>`;
+
+	    return messageNode;
 	  }
 	};
 
 	module.exports = Inbox;
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	const messages = {
+	  sent: [
+	    {to: "friend@mail.com", subject: "Check this out", body: "It's so cool"},
+	    {to: "person@mail.com", subject: "zzz", body: "so booring"}
+	  ],
+
+	  inbox: [
+	    {from: "grandma@mail.com",
+	     subject: "Fwd: Fwd: Fwd: Check this out",
+	     body: "Stay at home mom discovers cure for leg cramps. Doctors hate her"},
+	    {from: "person@mail.com",
+	     subject: "Questionnaire",
+	     body: "Take this free quiz win $1000 dollars"}
+	  ]
+	};
+
+	const MessageStore = {
+	  getInboxMessages: function() {
+	    return messages.inbox;
+	  },
+
+	  getSentMessages: function() {
+	    return messages.sent;
+	  }
+	};
+
+	module.exports = MessageStore;
 
 
 /***/ }

@@ -4,6 +4,7 @@ const Inbox = require('./Inbox.js');
 document.addEventListener("DOMContentLoaded", () => {
   initializeButtons();
   initializeRouter();
+  location.hash = "#inbox";
 });
 
 function initializeButtons() {
