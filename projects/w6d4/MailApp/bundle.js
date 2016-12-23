@@ -129,6 +129,8 @@
 	  ]
 	};
 
+	let messageDraft = new Message("", "", "", "");
+
 	const MessageStore = {
 	  getInboxMessages: function() {
 	    return messages.inbox;
@@ -136,8 +138,26 @@
 
 	  getSentMessages: function() {
 	    return messages.sent;
+	  },
+
+	  updateDraftField: function(field, value) {
+	    messageDraft[field] = value;
+	  },
+
+	  sendDraft: function() {
+	    messages.sent.push(messageDraft);
+	    messageDraft = new Message("", "", "", "");
 	  }
 	};
+
+	class Message {
+	  constructor(from, to, subject, body) {
+	    this.from = from;
+	    this.to = to;
+	    this.subject = subject;
+	    this.body = body;
+	  }
+	}
 
 	module.exports = MessageStore;
 
