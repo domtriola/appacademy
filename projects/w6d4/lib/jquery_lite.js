@@ -114,6 +114,43 @@
 	  removeClass(className) {
 	    this.HTMLElements.forEach(el => el.classList.remove(className));
 	  }
+
+	  children() {
+	    let children = [];
+	    this.HTMLElements.forEach(node => {
+	      let nodeChildren = Array.prototype.slice.call(node.children, 0);
+	      children = children.concat(nodeChildren);
+	    });
+
+	    return new DOMNodeCollection(children);
+	  }
+
+	  parent() {
+	    const parents = [];
+	    this.HTMLElements.forEach(node => {
+	      if (parents.indexOf(node.parentNode) === -1)
+	        parents.push(node.parentNode);
+	    });
+
+	    return new DOMNodeCollection(parents);
+	  }
+
+	  find(selector) {
+	    let children = [];
+	    this.HTMLElements.forEach(node => {
+	      let found = Array.prototype.slice
+	                       .call(node.querySelectorAll(selector), 0);
+	      children = children.concat(found);
+	    });
+
+	    return new DOMNodeCollection(children);
+	  }
+
+	  remove() {
+	    this.HTMLElements.forEach(node => {
+	      node.remove();
+	    });
+	  }
 	}
 
 	module.exports = DOMNodeCollection;
