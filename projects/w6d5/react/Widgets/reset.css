@@ -1,0 +1,10 @@
+body {
+  font-family: sans-serif;
+}
+
+h1, article, p, a, h2, h3, li, ul {
+  font-family: inherit;
+  font-weight: inherit;
+  margin: 0;
+  padding: 0;
+}

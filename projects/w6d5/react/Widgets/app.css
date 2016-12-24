@@ -1,0 +1,57 @@
+.tabs {
+  width: 300px;
+}
+
+.headers {
+  display: flex;
+}
+
+h1 {
+  font-size: 30;
+  font-weight: bold;
+}
+
+.headers div {
+  flex: 1;
+  border: 3px solid black;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+  padding: 10px 20px;
+  background-color: skyblue;
+}
+
+.headers div:hover {
+  background-color: #448cff;
+  font-weight: bold;
+}
+
+.headers p {
+  text-align: center;
+}
+
+.tabs-content {
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  border: 3px solid black;
+  height: 200px;
+  background-image: url(https://www.ncl.com/sites/default/files/DestinationGalleries.Hawaii.SnorkelingBay900x400.jpg);
+  /*background-position: center;*/
+  background-repeat: no-repeat;
+}
+
+.tabs-content article {
+  display: none;
+}
+
+.tabs-content .selected {
+  display: block;
+}
+
+.clock {
+  font-family: "nunito";
+}
