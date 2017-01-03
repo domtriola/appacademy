@@ -65,11 +65,24 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	document.addEventListener('DOMContentLoaded', function () {
+	  var addLoggingToDispatch = function addLoggingToDispatch(store) {
+	    var dispatch = store.dispatch;
+	    return function (action) {
+	      console.log(store.getState());
+	      console.log(action);
+	
+	      dispatch(action);
+	
+	      console.log(store.getState());
+	    };
+	  };
+	
 	  var preloadedState = localStorage.state ? JSON.parse(localStorage.state) : {};
-	  var store = (0, _store2.default)(preloadedState);
+	  var initStore = (0, _store2.default)(preloadedState);
+	  initStore.dispatch = addLoggingToDispatch(initStore);
 	
 	  var root = document.getElementById('content');
-	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: store }), root);
+	  _reactDom2.default.render(_react2.default.createElement(_root2.default, { store: initStore }), root);
 	});
 
 /***/ },
@@ -21497,9 +21510,23 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	// const addLoggingToDispatch = store => next => action => {
+	//   console.log("Action receive: ", action);
+	//   console.log("State pre-dispatch: ", store.getState());
+	//
+	//   let result = next(action);
+	//
+	//   console.log("State post-dispatch: ", store.getState());
+	//
+	//   return result;
+	// };
+	
 	var configureStore = function configureStore() {
 	  var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 	
+	  // const store = createStore(RootReducer,
+	  //                           preloadedState,
+	  //                           applyMiddleware(addLoggingToDispatch));
 	  var store = (0, _redux.createStore)(_root_reducer2.default, preloadedState);
 	  store.subscribe(function () {
 	    localStorage.state = JSON.stringify(store.getState());
