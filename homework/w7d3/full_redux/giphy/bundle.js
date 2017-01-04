@@ -64,13 +64,17 @@
 	
 	var _api_util = __webpack_require__(185);
 	
-	var SearchUtils = _interopRequireWildcard(_api_util);
-	
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	var _giphy_actions = __webpack_require__(184);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	window.fetchSearchGiphys = SearchUtils.fetchSearchGiphys;
+	var store = (0, _store2.default)();
+	
+	// Testing
+	
+	window.store = store;
+	window.fetchSearchGiphys = _api_util.fetchSearchGiphys;
+	window.receiveSearchGiphys = _giphy_actions.receiveSearchGiphys;
 
 /***/ },
 /* 1 */
@@ -19772,6 +19776,10 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _redux = __webpack_require__(160);
 	
 	var _reduxThunk = __webpack_require__(181);
@@ -19781,8 +19789,14 @@
 	var _root_reducer = __webpack_require__(182);
 	
 	var _root_reducer2 = _interopRequireDefault(_root_reducer);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var configureStore = function configureStore() {
+	  return (0, _redux.createStore)(_root_reducer2.default);
+	};
+	
+	exports.default = configureStore;
 
 /***/ },
 /* 160 */
@@ -20850,13 +20864,21 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _redux = __webpack_require__(160);
 	
 	var _giphys_reducer = __webpack_require__(183);
 	
 	var _giphys_reducer2 = _interopRequireDefault(_giphys_reducer);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	exports.default = (0, _redux.combineReducers)({
+	  giphys: _giphys_reducer2.default
+	});
 
 /***/ },
 /* 183 */
@@ -20864,7 +20886,25 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _giphy_actions = __webpack_require__(184);
+	
+	var GiphysReducer = function GiphysReducer() {
+	  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+	  var action = arguments[1];
+	
+	  switch (action.type) {
+	    case _giphy_actions.RECEIVE_SEARCH_GIPHYS:
+	      return action.giphys;
+	    default:
+	      return state;
+	  }
+	};
+	
+	exports.default = GiphysReducer;
 
 /***/ },
 /* 184 */

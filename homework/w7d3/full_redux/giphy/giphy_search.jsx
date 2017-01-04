@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
 
-import * as SearchUtils from './util/api_util';
+const store = configureStore();
 
-window.fetchSearchGiphys = SearchUtils.fetchSearchGiphys;
+
+// Testing
+import { fetchSearchGiphys } from './util/api_util';
+import { receiveSearchGiphys } from './actions/giphy_actions';
+window.store = store;
+window.fetchSearchGiphys = fetchSearchGiphys;
+window.receiveSearchGiphys = receiveSearchGiphys;
