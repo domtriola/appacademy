@@ -61,8 +61,16 @@
 	var _root = __webpack_require__(186);
 	
 	var _root2 = _interopRequireDefault(_root);
-
+	
+	var _api_util = __webpack_require__(185);
+	
+	var SearchUtils = _interopRequireWildcard(_api_util);
+	
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	window.fetchSearchGiphys = SearchUtils.fetchSearchGiphys;
 
 /***/ },
 /* 1 */
@@ -20862,19 +20870,43 @@
 /* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.receiveSearchGiphys = exports.RECEIVE_SEARCH_GIPHYS = undefined;
 	
 	var _api_util = __webpack_require__(185);
 	
 	var APIUtil = _interopRequireWildcard(_api_util);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+	
+	var RECEIVE_SEARCH_GIPHYS = exports.RECEIVE_SEARCH_GIPHYS = "RECEIVE_SEARCH_GIPHYS";
+	
+	var receiveSearchGiphys = exports.receiveSearchGiphys = function receiveSearchGiphys(giphys) {
+	  return {
+	    type: RECEIVE_SEARCH_GIPHYS,
+	    giphys: giphys
+	  };
+	};
 
 /***/ },
 /* 185 */
 /***/ function(module, exports) {
 
 	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var fetchSearchGiphys = exports.fetchSearchGiphys = function fetchSearchGiphys(searchTerm) {
+	  return $.ajax({
+	    type: "GET",
+	    url: "http://api.giphy.com/v1/gifs/search?q=" + searchTerm + "&api_key=dc6zaTOxFJmzC&limit=2"
+	  });
+	};
 
 /***/ },
 /* 186 */
