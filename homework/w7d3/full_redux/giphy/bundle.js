@@ -22244,16 +22244,45 @@
 	  function GiphysSearch(props) {
 	    _classCallCheck(this, GiphysSearch);
 	
-	    return _possibleConstructorReturn(this, (GiphysSearch.__proto__ || Object.getPrototypeOf(GiphysSearch)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (GiphysSearch.__proto__ || Object.getPrototypeOf(GiphysSearch)).call(this, props));
+	
+	    _this.state = { searchTerm: "" };
+	
+	    _this.updateSearchTerm = _this.updateSearchTerm.bind(_this);
+	    _this.handleSubmit = _this.handleSubmit.bind(_this);
+	    return _this;
 	  }
 	
 	  _createClass(GiphysSearch, [{
+	    key: 'updateSearchTerm',
+	    value: function updateSearchTerm(e) {
+	      this.setState({ searchTerm: e.target.value });
+	    }
+	  }, {
+	    key: 'handleSubmit',
+	    value: function handleSubmit(e) {
+	      e.preventDefault();
+	      var searchTerm = this.state.searchTerm.split(" ").join("+");
+	      this.props.fetchSearchGiphys(searchTerm);
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
+	      var giphys = this.props.giphys;
+	
+	
 	      return _react2.default.createElement(
 	        'div',
 	        null,
-	        'Testing'
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: this.handleSubmit },
+	          _react2.default.createElement('input', { type: 'text',
+	            onChange: this.updateSearchTerm,
+	            value: this.state.searchTerm }),
+	          _react2.default.createElement('input', { type: 'submit' })
+	        ),
+	        _react2.default.createElement(_giphys_index2.default, { giphys: giphys })
 	      );
 	    }
 	  }]);
@@ -22269,11 +22298,44 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var giphyIndexItems = function giphyIndexItems(giphys) {
+	  if (giphys) {
+	    return giphys.map(function (giphy, idx) {
+	      return _react2.default.createElement(
+	        'li',
+	        { key: idx, className: 'giphy-li' },
+	        _react2.default.createElement('img', { src: giphy.images.fixed_height.url })
+	      );
+	    });
+	  } else {
+	    return _react2.default.createElement('div', null);
+	  }
+	};
+	
+	var GiphysIndex = function GiphysIndex(_ref) {
+	  var giphys = _ref.giphys;
+	  return _react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(
+	      'ul',
+	      null,
+	      giphyIndexItems(giphys)
+	    )
+	  );
+	};
+	
+	exports.default = GiphysIndex;
 
 /***/ }
 /******/ ]);
