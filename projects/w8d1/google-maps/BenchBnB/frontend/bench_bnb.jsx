@@ -18,6 +18,9 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // TODO: testing
-import * as APIUtil from './util/benches_api_util';
-window.fetchBenches = APIUtil.fetchBenches;
-window.createBench = APIUtil.createBench;
+// import * as APIUtil from './util/benches_api_util';
+// window.fetchBenches = APIUtil.fetchBenches;
+// window.createBench = APIUtil.createBench;
+
+import { fetchBenches } from './actions/bench_actions';
+window.fetchBenches = fetchBenches;
