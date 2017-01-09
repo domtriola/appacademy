@@ -18,5 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // TODO: testing
-import { login } from './actions/session_actions';
-window.login = login;
+import * as APIUtil from './util/benches_api_util';
+window.fetchBenches = APIUtil.fetchBenches;
+window.createBench = APIUtil.createBench;
