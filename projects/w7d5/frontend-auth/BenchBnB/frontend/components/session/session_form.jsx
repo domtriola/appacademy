@@ -30,7 +30,7 @@ class SessionForm extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <ul>
-          {this.props.errors.map(err => <li>{err}</li>)}
+          {this.props.errors.map((err, i) => <li key={i}>{err}</li>)}
         </ul>
 
         <label> Username:
