@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
   validates :username, :session_token, :password_digest, presence: true
+  validates :username, :session_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
 
   def self.generate_session_token
